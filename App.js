@@ -14,9 +14,10 @@ export default function App() {
       fetchData()
   },[])
   return (
-    <View style={{flex:1, maxHeight:'auto'}}>
-    <StatusBar/>
-    <ScrollView>
+    <>
+  <StatusBar/>
+    <View className="flex-1 bg-white mt-8 items-center justify-center flex">
+    <ScrollView className="w-full h-full">
       {data.map(card => {
         return (
           <Card key={card.autorizado.codigo} name={card.aluno.nome} auth={card.responsavel_autorizador.nome} resp={card.autorizado}/>
@@ -24,6 +25,7 @@ export default function App() {
       })}
     </ScrollView>
     </View>
+    </>
   );
 }
 

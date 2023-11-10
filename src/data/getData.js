@@ -1,7 +1,7 @@
 import axios from "axios";
 
 axios.defaults.headers.common = {
-    "X-API-Key":"QEtBjJeDQE8qkO7CHcudDkFNEn7dsoeSHN696fpVku4Kso5lLCprqCdkZPFYOct1"
+    
 }
 const config = {
     headers: {
