@@ -18,21 +18,22 @@ export function Home(){
       }
       fetchData()
   },[])
-  
+  const StudentText= () => {
+    for(const name of data.values()){
+      return (
+        <Text>
+          {name}
+        </Text>
+      )     
+  }}
+
   return (
     <>
     <StatusBar/>
     <View className="bg-white items-center justify-center flex ">
     <ScrollView className="w-full h-full">
       <Text className='text-xl font-semibold text-neutral-900'>{}</Text>
-      {!loading && data.map(name => {
-        return (
-            <>
-            <Text>{name}</Text>
-            <Card name={name}></Card>
-            </>
-        )
-      })}
+      <StudentText/>
     </ScrollView>
     </View>
     </>
