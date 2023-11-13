@@ -1,6 +1,6 @@
 import { StatusBar } from "expo-status-bar"
 import { useEffect, useState } from "react"
-import { ScrollView, View, Text } from "react-native"
+import { ScrollView, View, Text, Pressable } from "react-native"
 import  Card from "../components/Card"
 import {datamock} from '../data/mockupdata'
 import { getData } from "../data/getData"
@@ -11,28 +11,32 @@ export function Home(){
   useEffect(() => {
       async function fetchData() {
         const response = await getData()
-        const unique = [...new Set(datamock.map(v => v.aluno.nome))]
-        setData(unique)
+        const uniqueNames = [...new Set(datamock.map(v => v.aluno.nome))]
+        setData(uniqueNames)
         setLoading(false)
         console.log(unique)
       }
       fetchData()
   },[])
-  const StudentText= () => {
+  const StudentText = () => {
+    const StudentTexts = []
     for(const name of data.values()){
-      return (
-        <Text>
-          {name}
-        </Text>
-      )     
-  }}
+        StudentTexts.push(
+          <Pressable onPressIn={() => (<Text>Olá</Text>)}>
+          <Text>{name}</Text>
+          </Pressable>
+        )
+  }
+
+  return StudentTexts
+}
 
   return (
     <>
     <StatusBar/>
     <View className="bg-white items-center justify-center flex ">
     <ScrollView className="w-full h-full">
-      <Text className='text-xl font-semibold text-neutral-900'>{}</Text>
+      <Text className='text-xl font-semibold text-neutral-900'>Alunos</Text>
       <StudentText/>
     </ScrollView>
     </View>
