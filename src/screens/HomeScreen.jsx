@@ -1,11 +1,9 @@
-import { StatusBar } from "expo-status-bar"
 import { useEffect, useState } from "react"
-import { ScrollView, View, Text, Pressable } from "react-native"
-import  Card from "../components/Card"
+import { ScrollView, View, Text, Pressable, TextInput } from "react-native"
 import {datamock} from '../data/mockupdata'
 import { getData } from "../data/getData"
-import { Detail } from "../components/Detail"
-export function Home(){
+import { RightOutlined } from "@ant-design/icons"
+export function HomeScreen({navigation}){
   const [data, setData]= useState([])
   const [loading, setLoading]= useState(true)
   useEffect(() => {
@@ -14,7 +12,6 @@ export function Home(){
         const uniqueNames = [...new Set(datamock.map(v => v.aluno.nome))]
         setData(uniqueNames)
         setLoading(false)
-        console.log(unique)
       }
       fetchData()
   },[])
@@ -22,8 +19,10 @@ export function Home(){
     const StudentTexts = []
     for(const name of data.values()){
         StudentTexts.push(
-          <Pressable onPressIn={() => (<Text>Olá</Text>)}>
-          <Text>{name}</Text>
+          <Pressable className='w-4/5 mx-3 my-4 h-14 bg-slate-100 flex rounded-md align-middle justify-center '  onPressIn={() => (navigation.navigate('Details', {
+            name: name
+          }))}>
+          <Text className='text-lg font-base px-3'>{name}</Text>
           </Pressable>
         )
   }
@@ -33,11 +32,12 @@ export function Home(){
 
   return (
     <>
-    <StatusBar/>
     <View className="bg-white items-center justify-center flex ">
+    <View>
+      <TextInput/>
+    </View>
     <ScrollView className="w-full h-full">
-      <Text className='text-xl font-semibold text-neutral-900'>Alunos</Text>
-      <StudentText/>
+    <StudentText/>
     </ScrollView>
     </View>
     </>
