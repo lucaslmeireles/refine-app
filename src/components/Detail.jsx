@@ -1,23 +1,39 @@
 import { Text, View } from "react-native"
 import { datamock } from "../data/mockupdata"
+import { useEffect, useState } from "react"
+import { getData } from "../data/getData"
 export function Detail({name}) {
-    const info_resp = datamock.filter(data => data.aluno.nome == name)
+    const [info_resp, setInfoResp] = useState([])
+    const [loading, setLoading] = useState(true)
+    useEffect(() => {
+        async function getRaw(){
+            const raw_data = await getData()
+            const info_resp = raw_data.filter(data => data.aluno.nome == name)
+            setInfoResp(info_resp)
+            setLoading(false)
+        }
+        getRaw()
+    },[])
 
-    if (!info_resp.length) return <Text>Nenhum responsavel encontrado</Text>
-    return (
-        <View className= 'flex flex-1 bg-slate-100 ml-3 mr-3 p-2'>
+    return loading ? (
+        <View className= 'flex flex-1  ml-3 mr-3 p-2'>
+        <Text>Carregando...</Text>    
+        </View>  
+    ) : (
+        <View className= 'flex flex-1  ml-3 mr-3 p-2'>
             <Text className='font-semibold text-xl text-neutral-950'>Responsável Autorizado</Text>
             {
             info_resp.map(v => {
                 return (
-                    <>
+                    <View className='my-2'>
                     <Text className='font-normal text-base text-neutral-900'>{v.autorizado.nome}</Text>
                     <Text className='font-normal text-base text-neutral-900'>CPF: {v.autorizado.cpf}</Text>
-                    <Text className='font-normal text-base text-neutral-900' >Relação: {v.autorizado.relacao}</Text>
-                    </>
+                    <Text className='font-normal text-base text-neutral-900' >Relação: {v.autorizado.relacao.toUpperCase()}</Text>
+                    </View>
                 )
             })}
-            <Text>{info_resp[0].responsavel_autorizador.nome}</Text>
+            <Text className='font-semibold text-xl text-neutral-950'>Quem Autorizou</Text>
+            <Text className='font-medium text-base text-neutral-950'>{info_resp[0].responsavel_autorizador.nome}</Text>
         </View>  
-    )
+    )  
 }

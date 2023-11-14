@@ -1,7 +1,6 @@
 import axios from "axios";
 
 axios.defaults.headers.common = {
-    
 }
 const config = {
     headers: {
