@@ -1,15 +1,14 @@
 import axios from "axios";
 
-axios.defaults.headers.common = {
-}
+axios.defaults.headers.common = {};
 const config = {
-    headers: {
-      "Content-Type": "application/json",
-    },
-  };
+  headers: {
+    "Content-Type": "application/json",
+  },
+};
 
-export async function getData(){
-    // const res = await axios.get('https://api.clipescola.com.br/cliphub/clipescola/entradasaida/autorizacoes?data_inicial=01%2F03%2F2023%2023%3A59%3A59&data_final=31%2F03%2F2023%2023%3A59%3A590', config)
-    // return res.data.data
-
+export async function getData() {
+  // const res = await axios.get('https://api.clipescola.com.br/cliphub/clipescola/entradasaida/autorizacoes?data_inicial=01%2F03%2F2023%2023%3A59%3A59&data_final=31%2F03%2F2023%2023%3A59%3A590', config)
+  // return res.data.data
+  return null;
 }
