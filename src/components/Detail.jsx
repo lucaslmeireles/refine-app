@@ -8,7 +8,7 @@ export function Detail({ name }) {
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     async function getRaw() {
-      const raw_data = await getData();
+      const raw_data = await getData() || datamock;
       const info_resp = raw_data.filter((data) => data.aluno.nome == name);
       setInfoResp(info_resp);
       setLoading(false);
@@ -25,7 +25,7 @@ export function Detail({ name }) {
       </Text>
       {info_resp.map((v) => {
         return (
-          <View className="my-2">
+          <View key={v.autorizado.codigo} className="my-2">
             <Text className="font-normal text-base text-neutral-900">
               {v.autorizado.nome}
             </Text>

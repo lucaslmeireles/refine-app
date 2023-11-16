@@ -19,7 +19,7 @@ export function HomeScreen({ navigation }) {
   return (
     <>
       <View className="bg-white items-center justify-center flex ">
-        <View>
+        <View className='bg-[#026F00]'>
           <TextInput />
         </View>
         <ScrollView className="w-full h-full">
